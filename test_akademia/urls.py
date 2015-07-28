@@ -5,14 +5,6 @@ from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns('',
-	url(r'^exam/', include('exam.urls')),
-    # Examples:
-    #url(r'^$', 'test_akademia.views.home', name='home'),
-    # url(r'^test_akademia/', include('test_akademia.foo.urls')),
-
-    # Uncomment the admin/doc line below to enable admin documentation:
-    #url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
-
-    # Uncomment the next line to enable the admin:
-    url(r'^admin/', include(admin.site.urls)),
+	url(r'^exam/', include('exam.urls', namespace="exam")),
+	url(r'^admin/', include(admin.site.urls)),
 )

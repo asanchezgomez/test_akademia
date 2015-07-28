@@ -1,0 +1,10 @@
+<h1>Available Tests</h1>
+{% if sort_test_list %}
+    <ul>
+    {% for test in sort_test_list %}
+        <li><a href="{% url 'exam:questions_test' test.id %}">{{ test.name }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No tests are available.</p>
+{% endif %}
