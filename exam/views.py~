@@ -20,6 +20,8 @@ def questions_test(request, test_id):
 
 # View that shows the results of a specific test
 def results(request, test_id):
-	p = get_object_or_404(Test, pk=test_id)
-	selected_choice = p.choice_set.get(pk=request.POST['choice'])
-	return HttpResponseRedirect(reverse('exam:results', args=(p.id,)))
+	test = get_object_or_404(Test, pk=test_id)
+	#for question in test.question_set.all():
+		#selecteds_choices = question.response_set.get(pk=request.POST[question.id])
+	id_pregunta = request.POST[question.id]
+	return render(request, 'exam/results.html', {'test': test, 'id_pregunta': id_pregunta })
