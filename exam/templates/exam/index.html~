@@ -1,8 +1,9 @@
 <h1>Available Tests</h1>
+<h4>index.html</h4>
 {% if sort_test_list %}
     <ul>
     {% for test in sort_test_list %}
-        <li><a href="{% url 'questions_test' test.id %}">{{ test.name }}</a></li>
+        <li><a href="{% url 'exam:questions_test' test.id %}">{{ test.name }}</a></li>
     {% endfor %}
     </ul>
 {% else %}

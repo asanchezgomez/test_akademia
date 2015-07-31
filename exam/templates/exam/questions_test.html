@@ -1,10 +1,12 @@
+<!-- Google search: get value radio button django -->
 <h1>{{ test.name }}</h1>
 <h2>{{ test.description }}</h2>
-<h2>Questions</h2>
+<h4>questions_test.html</h4>
 
 {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
 
 <form action="{% url 'exam:results' test.id %}" method="post">
+<!-- Cross Site Request Forgery protection -->
 {% csrf_token %}
 <!-- For each question in the current test... -->
 {% for question in test.question_set.all %}
@@ -14,9 +16,10 @@
 
 	<!-- For each question, we create a radio answer for each response -->
 	{% for response in question.response_set.all %}
-		<input type="radio" name="{{ question.id }}" id="response{{ forloop.counter }}" value="{{ response.id }}" />
-    	<label for="response{{ forloop.counter }}">{{ response.text }}</label><br />
+		<input type="radio" name="{{ question.id }}" id="{{ response.id }}" value="{{ response.id }}" />
+    	<label for="{{ response.id }}">{{ response.text }}</label><br/>
 	{% endfor %}
+
 {% endfor %}
-<input type="submit" value="Enviar" />
+<input type="submit" value="Enviar"/>
 </form>
