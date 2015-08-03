@@ -33,7 +33,10 @@ def results(request, test_id):
 	num_questions = test.question_set.count()
 
 	# Create a dictionary for store the answers selected
-	dic = {}
+	dic_answers_user = {}
+
+	# List that stores info to send to the template 
+	question_list = {}
 
 	# Initialize number of correct answers
 	correct_answers = 0
@@ -48,9 +51,17 @@ def results(request, test_id):
 				# Increment the number of correct answers
 				if response_selected.isCorrect:
 					correct_answers = correct_answers + 1
+				
+				#dic_answers_user[question.id] = [response_selected.isCorrect, response_selected.text]
+				question_list = [question.text, response_selected.text, response_selected.isCorrect]
+
+				# Search the correct answer
+				for response in question.response_set.all():
+					if response.isCorrect:
+						question_list.append(response.text)
 
 				# Store the results in the dictionary
-				dic[question.id] = response_selected.isCorrect
+				dic_answers_user[question.id] = question_list
 			
 	# Display results.html
-	return render(request, 'exam/results.html', {'test': test, 'dic' : dic, 'num_questions' : num_questions, 'correct_answers' : correct_answers})
+	return render(request, 'exam/results.html', {'test': test, 'dic_answers_user' : dic_answers_user, 'num_questions' : num_questions, 'correct_answers' : correct_answers})

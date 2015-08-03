@@ -1,7 +1,19 @@
 <h1>{{ test.name }}</h1>
-<h2>{{ response_select.text }}</h2>
 <h4>results.html</h4>
-{% for key, value in dic.items %} 
-  <li>{{key}} - {{value}}</li>
-{% endfor %}
-<h4>Puntuación: {{ correct_answers }}/{{ num_questions }}</h4>
+
+<!-- Show the answers selected by the user and the result-->
+<ol>
+	{% for key, value in dic_answers_user.items %} 
+	  <li><b>{{value.0}}</b></li>
+	  <ul>
+		{% if value.2 == True %}
+			<li>Ha seleccionado "{{value.1}}" y es correcto</li>
+		{% else %}
+			<li>Ha seleccionado "{{value.1}}" y es incorrecto</li>
+			<li>La respuesta correcta es "{{value.3}}"</li>
+		{% endif %}
+	  </ul>
+	{% endfor %}
+</ol>
+<!-- Show the test's result -->
+<h4>Resultado del test: {{ correct_answers }}/{{ num_questions }}</h4>

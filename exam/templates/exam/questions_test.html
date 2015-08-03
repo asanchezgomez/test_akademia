@@ -13,7 +13,7 @@
 {% for question in test.question_set.all %}
 
 	<!-- We show the question's text --> 
-	<li>{{ question.text }}</li>
+	<li><b>{{ question.text }}</b></li>
 	<ol type="a">
 		<!-- For each question, we create a radio answer for each response -->
 		{% for response in question.response_set.all %}
