@@ -1,3 +1,6 @@
 <h1>{{ test.name }}</h1>
-<h2>{{ response_select }}</h2>
+<h2>{{ response_select.text }}</h2>
 <h4>results.html</h4>
+{% for key, value in dic.items %} 
+  <li>{{key}} - {{value}}</li>
+{% endfor %}
