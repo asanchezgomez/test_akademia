@@ -8,18 +8,22 @@
 <form action="{% url 'exam:results' test.id %}" method="post">
 <!-- Cross Site Request Forgery protection -->
 {% csrf_token %}
+<ol>
 <!-- For each question in the current test... -->
 {% for question in test.question_set.all %}
 
 	<!-- We show the question's text --> 
-    <li>{{ question.text }}</li>
-
-	<!-- For each question, we create a radio answer for each response -->
-	{% for response in question.response_set.all %}
-		<input type="radio" name="{{ question.text }}" id="{{ response.id }}" value="{{ response.id }}" />
-    	<label for="{{ response.id }}">{{ response.text }}</label><br/>
-	{% endfor %}
-
+	<li>{{ question.text }}</li>
+	<ol type="a">
+		<!-- For each question, we create a radio answer for each response -->
+		{% for response in question.response_set.all %}
+			<li>
+				<input type="radio" name="{{ question.text }}" id="{{ response.id }}" value="{{ response.id }}" />
+				<label for="{{ response.id }}">{{ response.text }}</label><br/>
+			</li>
+		{% endfor %}
+	</ol>
 {% endfor %}
+</ol>
 <input type="submit" value="Enviar"/>
 </form>
