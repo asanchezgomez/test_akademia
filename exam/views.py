@@ -43,7 +43,9 @@ def results(request, test_id):
 
 	# Iterate through all questions in the test selected
 	for question in test.question_set.all():
+			# If method is POST
 			if request.method=='POST':
+
 				# Get the answer selected for each question
 				choice=request.POST[question.text]
 				response_selected = get_object_or_404(Response, pk=choice)
@@ -52,7 +54,7 @@ def results(request, test_id):
 				if response_selected.isCorrect:
 					correct_answers = correct_answers + 1
 				
-				#dic_answers_user[question.id] = [response_selected.isCorrect, response_selected.text]
+				# Store in a list some info that will show in results.html
 				question_list = [question.text, response_selected.text, response_selected.isCorrect]
 
 				# Search the correct answer

@@ -18,7 +18,7 @@
 		<!-- For each question, we create a radio answer for each response -->
 		{% for response in question.response_set.all %}
 			<li>
-				<input type="radio" name="{{ question.text }}" id="{{ response.id }}" value="{{ response.id }}" />
+				<input type="radio" name="{{question.text}}" id="{{ response.id }}" value="{{ response.id }}" />
 				<label for="{{ response.id }}">{{ response.text }}</label><br/>
 			</li>
 		{% endfor %}

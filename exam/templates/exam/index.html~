@@ -1,11 +1,35 @@
-<h1>Available Tests</h1>
-<h4>index.html</h4>
-{% if sort_test_list %}
-    <ul>
-    {% for test in sort_test_list %}
-        <li><a href="{% url 'exam:questions_test' test.id %}">{{ test.name }}</a></li>
-    {% endfor %}
-    </ul>
-{% else %}
-    <p>No tests are available.</p>
-{% endif %}
+{% load staticfiles %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'exam/style.css' %}" />
+<body>
+
+<div id="header">
+	<div id ="icon_left">
+		<img src="{% static "exam/images/logo_academia.jpg" %}" alt="akademia_icon"/>
+	</div>
+	<h1 id ="title">Placement Test</h1>
+	<div id ="icon_right">
+		<img src="{% static "exam/images/logo_academia.jpg" %}" alt="akademia_icon"/>
+	</div>
+</div>
+
+<div id="section">
+	<div id="tests">
+		<h2>Select one of the available tests:</h2>
+		{% if sort_test_list %}
+			<ul>
+			{% for test in sort_test_list %}
+				<li><a href="{% url 'exam:questions_test' test.id %}">{{ test.name }}</a></li>
+			{% endfor %}
+			</ul>
+		{% else %}
+			<p>No tests are available.</p>
+		{% endif %}
+	</div>
+</div>
+
+<div id="footer">
+	<img id= "icon_footer" src="{% static "exam/images/icon_footer.png" %}" alt="akademia_icon"/>
+</div>
+
+</body>
