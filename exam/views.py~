@@ -47,7 +47,7 @@ def results(request, test_id):
 			if request.method=='POST':
 
 				# Get the answer selected for each question
-				choice=request.POST[question.id+question.text]
+				choice=request.POST[question.id]
 				response_selected = get_object_or_404(Response, pk=choice)
 
 				# Increment the number of correct answers
