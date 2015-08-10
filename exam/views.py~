@@ -6,6 +6,8 @@ from exam.models import Test,Response
 from exam.forms import ContactForm
 from django.core.mail import send_mail
 
+from django.contrib import messages
+
 # Main view that shows all tests created
 def index(request):
 	# Order available tests by name
@@ -46,11 +48,20 @@ def results(request, test_id):
 			# If method is POST
 			if request.method=='POST':
 
-				# Get the answer selected for each question
-				choice=request.POST[question.id]
+				
+				try:
+					choice=request.POST[unicode(question.id)]
+				except Exception as e:
+					# Agregar campo checked en response, y que en questions_test.html compruebe
+					# el campo y lo muestre seleccionado o no. En admin, quitar campo checked. "same template without reload django"
+					# https://docs.djangoproject.com/en/dev/ref/contrib/messages/#using-messages-in-views-and-templates
+					messages.warning(request, 'You have to answer all questions.')
+					return render(request, 'exam/questions_test.html',{'test': test})
+
+				#choice=request.POST[unicode(question.id)]
 				response_selected = get_object_or_404(Response, pk=choice)
 
-				# Increment the number of correct answers
+				# Get the answer selected for each question
 				if response_selected.isCorrect:
 					correct_answers = correct_answers + 1
 				

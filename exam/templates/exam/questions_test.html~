@@ -1,6 +1,5 @@
 <!-- Google search: get value radio button django -->
 <h1>{{ test.name }}</h1>
-<h2>{{ test.description }}</h2>
 <h4>questions_test.html</h4>
 
 {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
@@ -27,3 +26,15 @@
 </ol>
 <input type="submit" value="Enviar"/>
 </form>
+
+<!-- Error message if the user doesn't answer all questions -->
+{% if messages %}
+<ul class="messages">
+	<!--{% for message in messages %}
+		<li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+	{% endfor %}-->
+	<script type="text/javascript">
+		alert("You have to answer all questions");
+	</script>
+</ul>
+{% endif %}
