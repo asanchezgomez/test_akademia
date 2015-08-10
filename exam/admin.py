@@ -25,12 +25,10 @@ class TestAdmin(NestedModelAdmin):
 	inlines = [QuestionInline,]
 	fieldsets = [
         (None,               {'fields': ['name']}),
-        ('Description', {'fields': ['description'], 'classes': ['collapse']}),
     ]
 	formfield_overrides = {
         models.CharField: {'widget': TextInput(attrs={'size':'20'})},
         models.TextField: {'widget': Textarea(attrs={'rows':2, 'cols':40})},
     }
-	list_display = ('name', 'description')
 
 admin.site.register(Test, TestAdmin)

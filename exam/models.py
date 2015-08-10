@@ -3,7 +3,6 @@ from django.db import models
 # Create your models here.
 class Test(models.Model):
 	name = models.CharField(max_length=200)
-	description = models.TextField()
 	
 	# Getter name
 	def __unicode__(self):
@@ -25,7 +24,6 @@ class Question(models.Model):
 	)
 
 	text = models.TextField()
-	required = models.BooleanField()
 	test = models.ForeignKey(Test)
 	question_type = models.CharField(max_length=200, choices=QUESTION_TYPES, default=TEXT)
 

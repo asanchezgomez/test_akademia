@@ -42,6 +42,7 @@ html, body {
 	width: -moz-fit-content;
 	height: -webkit-fit-content;
 	margin: 0 auto;
+	text-align:left;
 }
 
 #footer {
