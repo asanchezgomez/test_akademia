@@ -12,7 +12,6 @@ from django.contrib import messages
 def index(request):
 	# Order available tests by name
 	sort_test_list = Test.objects.order_by('name')[:5]
-	Response.objects.all().update(isChecked='False')
 
 	# Display index.html
 	return render(request, 'exam/index.html', {'sort_test_list': sort_test_list})
@@ -55,6 +54,27 @@ def results(request, test_id):
 				# Get the choice through POST
 				try:
 					choice=request.POST[unicode(question.id)]
+					#choice=request.POST[unicode(question.id)]
+					response_selected = get_object_or_404(Response, pk=choice)
+					#Response.objects.filter(pk=choice).update(isChecked='True')
+					#Response.objects.update(isChecked='False')
+					response_selected.isChecked = True
+					response_selected.save()
+
+					# Get the answer selected for each question
+					if response_selected.isCorrect:
+						correct_answers = correct_answers + 1
+				
+					# Store in a list some info that will show in results.html
+					question_list = [question.text, response_selected.text, response_selected.isCorrect]
+
+					# Search the correct answer
+					for response in question.response_set.all():
+						if response.isCorrect:
+							question_list.append(response.text)
+
+					# Store the results in the dictionary
+					dic_answers_user[question.id] = question_list
 				except Exception as e:
 					# Agregar campo checked en response, y que en questions_test.html compruebe
 					# el campo y lo muestre seleccionado o no. En admin, quitar campo checked. "update django boolean"
@@ -63,28 +83,19 @@ def results(request, test_id):
 						messages.warning(request, 'You have to answer all questions.')
 						msg_flag = msg_flag + 1
 					
-				#choice=request.POST[unicode(question.id)]
-				response_selected = get_object_or_404(Response, pk=choice)
-				#Response.objects.filter(pk=choice).update(isChecked='True')
-				Response.objects.update(isChecked='False')
-
-				# Get the answer selected for each question
-				if response_selected.isCorrect:
-					correct_answers = correct_answers + 1
 				
-				# Store in a list some info that will show in results.html
-				question_list = [question.text, response_selected.text, response_selected.isCorrect]
-
-				# Search the correct answer
-				for response in question.response_set.all():
-					if response.isCorrect:
-						question_list.append(response.text)
-
-				# Store the results in the dictionary
-				dic_answers_user[question.id] = question_list
 	
+	# If at least one question is not answered, the user will stay in the same page
 	if msg_flag > 0:
 		return render(request, 'exam/questions_test.html',{'test': test})
+
+	# Otherwise
 	else:		
+		# Set all questions unchecked
+		for question in test.question_set.all():
+			for response in question.response_set.all():
+				response.isChecked = False
+				response.save()
+
 		# Display results.html
 		return render(request, 'exam/results.html', {'test': test, 'dic_answers_user' : dic_answers_user, 'num_questions' : num_questions, 'correct_answers' : correct_answers})
