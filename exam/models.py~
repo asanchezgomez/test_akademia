@@ -24,7 +24,6 @@ class Question(models.Model):
 	)
 
 	text = models.TextField()
-	required = models.BooleanField()
 	test = models.ForeignKey(Test)
 	question_type = models.CharField(max_length=200, choices=QUESTION_TYPES, default=TEXT)
 
@@ -36,6 +35,7 @@ class Response(models.Model):
 	text = models.TextField()
 	isCorrect = models.BooleanField()
 	question = models.ForeignKey(Question)
+	checked = models.BooleanField(default=False)
 
 	# Getter name
 	def __unicode__(self):

@@ -11,6 +11,10 @@ class ResponseInline(NestedTabularInline):
         models.CharField: {'widget': TextInput(attrs={'size':'20'})},
         models.TextField: {'widget': Textarea(attrs={'rows':2, 'cols':40})},
     }
+	fieldsets = [
+        (None,               {'fields': ['text']}),
+		(None,               {'fields': ['isCorrect']}),
+    ]
 
 class QuestionInline(NestedTabularInline):
 	model = Question

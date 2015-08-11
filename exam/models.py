@@ -35,6 +35,7 @@ class Response(models.Model):
 	text = models.TextField()
 	isCorrect = models.BooleanField()
 	question = models.ForeignKey(Question)
+	isChecked = models.BooleanField(default=False)
 
 	# Getter name
 	def __unicode__(self):

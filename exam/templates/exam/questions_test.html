@@ -13,7 +13,11 @@
 		<!-- For each question, we create a radio answer for each response -->
 		{% for response in question.response_set.all %}
 			<li>
-				<input type="radio" name="{{question.id}}" id="{{ response.id }}" value="{{ response.id }}" />
+				{% if response.isChecked %}
+					<input type="radio" name="{{question.id}}" id="{{ response.id }}" value="{{ response.id }}" checked/>
+				{% else %}
+					<input type="radio" name="{{question.id}}" id="{{ response.id }}" value="{{ response.id }}"/>
+				{% endif %}
 				<label for="{{ response.id }}">{{ response.text }}</label><br/>
 			</li>
 		{% endfor %}

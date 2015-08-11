@@ -12,6 +12,7 @@ from django.contrib import messages
 def index(request):
 	# Order available tests by name
 	sort_test_list = Test.objects.order_by('name')[:5]
+	Response.objects.all().update(isChecked='False')
 
 	# Display index.html
 	return render(request, 'exam/index.html', {'sort_test_list': sort_test_list})
@@ -43,6 +44,9 @@ def results(request, test_id):
 	# Initialize number of correct answers
 	correct_answers = 0
 
+	# Initialize flag error messages
+	msg_flag = 0
+
 	# Iterate through all questions in the test selected
 	for question in test.question_set.all():
 			# If method is POST
@@ -53,13 +57,16 @@ def results(request, test_id):
 					choice=request.POST[unicode(question.id)]
 				except Exception as e:
 					# Agregar campo checked en response, y que en questions_test.html compruebe
-					# el campo y lo muestre seleccionado o no. En admin, quitar campo checked. "same template without reload django"
+					# el campo y lo muestre seleccionado o no. En admin, quitar campo checked. "update django boolean"
 					# https://docs.djangoproject.com/en/dev/ref/contrib/messages/#using-messages-in-views-and-templates
-					messages.warning(request, 'You have to answer all questions.')
-					return render(request, 'exam/questions_test.html',{'test': test})
-
+					if msg_flag == 0:
+						messages.warning(request, 'You have to answer all questions.')
+						msg_flag = msg_flag + 1
+					
 				#choice=request.POST[unicode(question.id)]
 				response_selected = get_object_or_404(Response, pk=choice)
+				#Response.objects.filter(pk=choice).update(isChecked='True')
+				Response.objects.update(isChecked='False')
 
 				# Get the answer selected for each question
 				if response_selected.isCorrect:
@@ -75,6 +82,9 @@ def results(request, test_id):
 
 				# Store the results in the dictionary
 				dic_answers_user[question.id] = question_list
-			
-	# Display results.html
-	return render(request, 'exam/results.html', {'test': test, 'dic_answers_user' : dic_answers_user, 'num_questions' : num_questions, 'correct_answers' : correct_answers})
+	
+	if msg_flag > 0:
+		return render(request, 'exam/questions_test.html',{'test': test})
+	else:		
+		# Display results.html
+		return render(request, 'exam/results.html', {'test': test, 'dic_answers_user' : dic_answers_user, 'num_questions' : num_questions, 'correct_answers' : correct_answers})
