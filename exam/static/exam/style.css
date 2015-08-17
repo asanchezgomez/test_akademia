@@ -57,3 +57,11 @@ html, body {
 	float:center;
 	height:75%;
 }
+
+#correct {
+	color: green; 
+}
+
+#incorrect {
+	color: red; 
+}

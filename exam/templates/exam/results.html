@@ -1,19 +1,38 @@
-<h1>{{ test.name }}</h1>
-<h4>results.html</h4>
 
-<!-- Show the answers selected by the user and the result-->
-<ol>
-	{% for key, value in dic_answers_user.items %} 
-	  <li><b>{{value.0}}</b></li>
-	  <ul>
-		{% if value.2 == True %}
-			<li>Ha seleccionado "{{value.1}}" y es correcto</li>
-		{% else %}
-			<li>Ha seleccionado "{{value.1}}" y es incorrecto</li>
-			<li>La respuesta correcta es "{{value.3}}"</li>
-		{% endif %}
-	  </ul>
-	{% endfor %}
-</ol>
+
+
+{% load staticfiles %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'exam/style.css' %}" />
+<body>
+
+	<div id="header">
+		<img id ="icon_left" src="{% static "exam/images/logo_academia.jpg" %}" alt="akademia_icon"/>
+		<h1 id = "title">Placement Test</h1>
+		<img id ="icon_right" src="{% static "exam/images/logo_academia.jpg" %}" alt="akademia_icon"/>
+	</div>
+
+	<div id="section" style="overflow-y: scroll; height:400px;">
+		<!-- Show the answers selected by the user and the result-->
+		<ol>
+			{% for key, value in dic_answers_user.items %} 
+			  <li><b>{{value.0}}</b></li>
+			  <ul>
+				{% if value.2 == True %}
+					<li>Ha seleccionado "{{value.1}}" y es <span id="correct">correcto</span></li>
+				{% else %}
+					<li>Ha seleccionado "{{value.1}}" y es <span id="incorrect">incorrecto</span></li>
+					<li>La respuesta correcta es "{{value.3}}"</li>
+				{% endif %}
+			  </ul>
+			{% endfor %}
+		</ol>
 <!-- Show the test's result -->
-<h4>Resultado del test: {{ correct_answers }}/{{ num_questions }}</h4>
+<h4>Test result: {{ correct_answers }}/{{ num_questions }}</h4>
+		
+	</div>
+
+	<div id="footer">
+		<img id= "icon_footer" src="{% static "exam/images/icon_footer.png" %}" alt="akademia_icon"/>
+	</div>
+</body>
