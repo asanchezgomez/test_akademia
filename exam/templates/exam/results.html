@@ -1,6 +1,3 @@
-
-
-
 {% load staticfiles %}
 
 <link rel="stylesheet" type="text/css" href="{% static 'exam/style.css' %}" />
@@ -19,20 +16,24 @@
 			  <li><b>{{value.0}}</b></li>
 			  <ul>
 				{% if value.2 == True %}
-					<li>Ha seleccionado "{{value.1}}" y es <span id="correct">correcto</span></li>
+					<p id="correct">&#10004;{{value.1}}</p>
+					<p id="correct_answer">Respuesta correcta</p>
 				{% else %}
-					<li>Ha seleccionado "{{value.1}}" y es <span id="incorrect">incorrecto</span></li>
-					<li>La respuesta correcta es "{{value.3}}"</li>
+					<p id="incorrect">&#x2717;{{value.1}}</p>
+					<p id="incorrect_answer">Respuesta incorrecta</p>
+					<p id="correct"><span id ="correct_answer">La respuesta correcta es </span>{{value.3}}</p>
 				{% endif %}
 			  </ul>
 			{% endfor %}
 		</ol>
-<!-- Show the test's result -->
-<h4>Test result: {{ correct_answers }}/{{ num_questions }}</h4>
-		
+		<!-- Show the test's result -->
+		<h4>Test result: {{ correct_answers }}/{{ num_questions }}</h4>
+		<a href="/exam/">
+			<img id="home_icon" src="{% static "exam/images/home.png" %}" alt="home_icon">
+		</a>
 	</div>
-
+	
 	<div id="footer">
-		<img id= "icon_footer" src="{% static "exam/images/icon_footer.png" %}" alt="akademia_icon"/>
+		<img id= "footer_icon" src="{% static "exam/images/footer_icon.png" %}" alt="akademia_icon"/>
 	</div>
 </body>

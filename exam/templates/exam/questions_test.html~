@@ -1,5 +1,4 @@
 {% load staticfiles %}
-
 <link rel="stylesheet" type="text/css" href="{% static 'exam/style.css' %}" />
 <body>
 
@@ -9,7 +8,7 @@
 		<img id ="icon_right" src="{% static "exam/images/logo_academia.jpg" %}" alt="akademia_icon"/>
 	</div>
 
-	<div id="section">
+	<div id="section" style="overflow-y: scroll; height:400px;">
 		<!-- Form test -->
 		<form action="{% url 'exam:results' test.id %}" method="post">
 		<!-- Cross Site Request Forgery protection -->
@@ -52,7 +51,7 @@
 	</div>
 
 	<div id="footer">
-		<img id= "icon_footer" src="{% static "exam/images/icon_footer.png" %}" alt="akademia_icon"/>
+		<img id= "footer_icon" src="{% static "exam/images/footer_icon.png" %}" alt="akademia_icon"/>
 	</div>
 
 </body>

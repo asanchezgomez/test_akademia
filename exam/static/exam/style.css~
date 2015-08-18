@@ -3,6 +3,15 @@ html, body {
 	margin:0;
 }
 
+p {
+  margin-top: 0em;
+  margin-bottom: 0em;
+}
+
+h2 {
+	text-decoration: underline;
+}
+
 #header {
     background-color:red;
     color:white;
@@ -15,6 +24,7 @@ html, body {
 }
 
 #icon_left {
+	border-radius: 10%;
 	float:left;
 	height:75%;
 	margin-top:10px;
@@ -22,6 +32,7 @@ html, body {
 }
 
 #icon_right {
+	border-radius: 10%;
 	float:right;
 	height:75%;
 	margin-top:10px;
@@ -33,16 +44,16 @@ html, body {
 	height:70%;
 }
 
-#select_tests { margin: 0 auto;
-	background-color: yellow;
-	height:90%;
-	text-align:center;
+#select_tests { 
+	margin: 0 auto;
+	width: -moz-fit-content;
+	height: -webkit-fit-content;
 }
 #tests {
 	width: -moz-fit-content;
 	height: -webkit-fit-content;
 	margin: 0 auto;
-	text-align:left;
+	float:left;
 }
 
 #footer {
@@ -53,15 +64,30 @@ html, body {
 	height:10%;
 }
 
-#icon_footer {
+#footer_icon {
 	float:center;
 	height:75%;
 }
 
 #correct {
-	color: green; 
+	color: #04B404; 
 }
 
 #incorrect {
-	color: green; 
+	color: red; 
+}
+
+#correct_answer {
+	color: #04B404; 
+	font-size:14px;
+}
+
+#incorrect_answer {
+	color: red; 
+	font-size:14px
+}
+#home_icon {
+	height:10%;
+	margin:0px auto;
+	display:block;
 }
