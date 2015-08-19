@@ -92,3 +92,7 @@ h2 {
 	margin:0px auto;
 	display:block;
 }
+#without_questions {
+	margin:0 auto;
+	width: -moz-fit-content;
+}

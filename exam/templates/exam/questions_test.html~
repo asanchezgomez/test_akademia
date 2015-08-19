@@ -9,33 +9,36 @@
 	</div>
 
 	<div id="section" style="overflow-y: scroll; height:400px;">
-		<!-- Form test -->
-		<form action="{% url 'exam:results' test.id %}" method="post">
-		<!-- Cross Site Request Forgery protection -->
-		{% csrf_token %}
-		<ol>
-		<!-- For each question in the current test... -->
-		{% for question in test.question_set.all %}
-
-			<!-- We show the question's text --> 
-			<li><b>{{ question.text }}</b></li>
-			<ol type="a">
-				<!-- For each question, we create a radio answer for each response -->
-				{% for response in question.response_set.all %}
-					<li>
-						{% if response.isChecked %}
-							<input type="radio" name="{{question.id}}" id="{{ response.id }}" value="{{ response.id }}" checked/>
-						{% else %}
-							<input type="radio" name="{{question.id}}" id="{{ response.id }}" value="{{ response.id }}"/>
-						{% endif %}
-						<label for="{{ response.id }}">{{ response.text }}</label><br/>
-					</li>
-				{% endfor %}
-			</ol>
-		{% endfor %}
-		</ol>
-		<input type="submit" value="Enviar"/>
+		{% if test.question_set.count > 0 %}
+			<!-- Form test -->
+			<form action="{% url 'exam:results' test.id %}" method="post">
+				<!-- Cross Site Request Forgery protection -->
+				{% csrf_token %}
+				<ol>
+					<!-- For each question in the current test... -->
+					{% for question in test.question_set.all %}
+						<!-- We show the question's text --> 
+						<li><b>{{ question.text }}</b></li>
+						<ol type="a">
+							<!-- For each question, we create a radio answer for each response -->
+							{% for response in question.response_set.all %}
+								<li>
+									{% if response.isChecked %}
+										<input type="radio" name="{{question.id}}" id="{{ response.id }}" value="{{ response.id }}" checked/>
+									{% else %}
+										<input type="radio" name="{{question.id}}" id="{{ response.id }}" value="{{ response.id }}"/>
+									{% endif %}
+									<label for="{{ response.id }}">{{ response.text }}</label><br/>
+								</li>
+							{% endfor %}
+						</ol>
+					{% endfor %}
+				</ol>
+				<input type="submit" value="Enviar"/>
 		</form>
+		{% else %}
+			<p id="without_questions">No questions are available.</p>
+		{% endif %}
 
 		<!-- Error message if the user doesn't answer all questions -->
 		{% if messages %}
@@ -48,8 +51,14 @@
 			</script>
 		</ul>
 		{% endif %}
+
+		<!-- Home icon -->
+		<!--<a href="/exam/">
+			<img id="home_icon" src="{% static "exam/images/home.png" %}" alt="home_icon">
+		</a>-->
 	</div>
 
+	<!-- Footer -->
 	<div id="footer">
 		<img id= "footer_icon" src="{% static "exam/images/footer_icon.png" %}" alt="akademia_icon"/>
 	</div>

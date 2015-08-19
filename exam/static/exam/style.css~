@@ -65,6 +65,7 @@ h2 {
 }
 
 #footer_icon {
+	border-radius: 10%;
 	float:center;
 	height:75%;
 }
@@ -90,4 +91,8 @@ h2 {
 	height:10%;
 	margin:0px auto;
 	display:block;
+}
+#without_questions {
+	float: center;
+	width: -moz-fit-content;
 }

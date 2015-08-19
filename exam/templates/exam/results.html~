@@ -1,7 +1,9 @@
 {% load staticfiles %}
-<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate, post-check=0, pre-check=0" /> 
-<meta http-equiv="Pragma" content="no-cache" />
-
+<script>
+  function preventBack(){window.history.forward();}
+  setTimeout("preventBack()", 0);
+  window.onunload=function(){null};
+</script>
 <link rel="stylesheet" type="text/css" href="{% static 'exam/style.css' %}" />
 <body>
 
