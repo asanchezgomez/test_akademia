@@ -8,7 +8,7 @@
 		<img id ="icon_right" src="{% static "exam/images/logo_academia.jpg" %}" alt="akademia_icon"/>
 	</div>
 
-	<div id="section" style="overflow-y: scroll; height:400px;">
+	<div id="section_base" style="overflow-y: scroll; height:400px;">
 		{% if test.question_set.count > 0 %}
 			<!-- Form test -->
 			<form action="{% url 'exam:results' test.id %}" method="post">

@@ -1,9 +1,4 @@
 {% load staticfiles %}
-<script>
-  function preventBack(){window.history.forward();}
-  setTimeout("preventBack()", 0);
-  window.onunload=function(){null};
-</script>
 <link rel="stylesheet" type="text/css" href="{% static 'exam/style.css' %}" />
 <body>
 
@@ -12,8 +7,7 @@
 		<h1 id = "title">Placement Test</h1>
 		<img id ="icon_right" src="{% static "exam/images/logo_academia.jpg" %}" alt="akademia_icon"/>
 	</div>
-
-	<div id="section" style="overflow-y: scroll; height:400px;">
+	<div id="section_base" style="overflow-y: scroll; height:400px;">
 		<!-- Show the answers selected by the user and the result-->
 		<ol>
 			{% for key, value in dic_answers_user.items %} 

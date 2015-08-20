@@ -39,7 +39,16 @@ h2 {
 	margin-right:10px;
 }
 
-#section {
+#section_index {
+    padding:10px;
+	height:70%;
+	display: table;
+	overflow: hidden; 
+	position: relative;
+	margin:0 auto
+}
+
+#section_base {
     padding:10px;
 	height:70%;
 }
@@ -48,12 +57,15 @@ h2 {
 	margin: 0 auto;
 	width: -moz-fit-content;
 	height: -webkit-fit-content;
+	display: table;
+	float: left;
 }
 #tests {
 	width: -moz-fit-content;
 	height: -webkit-fit-content;
 	margin: 0 auto;
 	float:left;
+	display: table;
 }
 
 #footer {
@@ -95,4 +107,16 @@ h2 {
 #without_questions {
 	margin:0 auto;
 	width: -moz-fit-content;
+	display: table;
+}
+#open_interrogation {
+	width: -moz-fit-content;
+	float: left;
+	margin:0 auto
+}
+
+#close_interrogation {
+	width: -moz-fit-content;
+	float: left;
+	margin:0 auto
 }
