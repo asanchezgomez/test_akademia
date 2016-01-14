@@ -1,2 +1,2 @@
 # test_akademia
-Spanish evaluation test made with Django for http://www.akademiaene.com/
+Spanish evaluation test made with Django/Python for http://www.akademiaene.com/
